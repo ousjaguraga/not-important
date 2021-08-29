@@ -2,11 +2,48 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#Entry-form {
+  height: 50vmin;
+  width: 80vmin;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed white;
+  border-radius: 5px 5px;
+  color: aliceblue;
+  
 }
 
+
+#Entry-form div{
+  
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+margin-top: 2.5vmin;
+
+}
+
+#Entry-form div input {
+  
+  height: 5vmin;
+  width: 30vw;
+  margin: 20px;
+  border: 2px solid white;
+  border-radius: 5px 5px;
+  
+  font-size: large;
+  
+
+}
+
+#Entry-form #Submit-button {
+  min-width: 20vw;
+  min-height: 5vh;
+  background-color: #61dafb;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -19,7 +56,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
 }
