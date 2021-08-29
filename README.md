@@ -44,3 +44,29 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+## Reproduce 
+## Setup 
+
+
+`npx create-react-app appName —template typescrript`
+ cd into the appName. what you named your app
+ 
+ ## Setup github repo
+`git init`
+`git add README.md`
+`git commit -m "first commit"`
+
+- change main branch from master to main ✊🏽
+`git branch -M main`
+
+- connect our local branch to the one on github
+`git remote add origin https://github.com/ousjaguraga/not-important.git`
+`git push -u origin main`
+
+
+`git remote add origin `
+
+if you get an error remote branch is ahead 
+do `git push -f origin main`
