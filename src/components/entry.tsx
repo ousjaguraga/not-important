@@ -1,22 +1,26 @@
-import React from 'react'
+import React, {ChangeEventHandler, MouseEventHandler} from 'react'
 
-interface label {
-    name: string
-    when: string
-    important: string
-    urgent: string
-    
+
+interface IFormEventHandlers {
+    handleNameChange: ChangeEventHandler
+    handleTimeChange: ChangeEventHandler
+    handleImpChange: ChangeEventHandler
+    handleUrgChange: ChangeEventHandler
+    handleSubmit: MouseEventHandler<HTMLButtonElement>
+    //urgValue: string
+
 }
-export default function entry(props: label) {
+export default function Entry(props: IFormEventHandlers) {
+    
     return (
         <div>
             <form id='Entry-form'>
-            <div><input type="text" placeholder='Name' id="name" /></div>
-            <div><input type="text" placeholder='When' id="name"  /></div>
-            <div><input type="text" placeholder='Is this important' /></div>
-            <div><input type="text" placeholder='Is this urgent'  /></div>
+            <div><input type="text" placeholder='Name'   onChange={props.handleNameChange}/></div>
+            <div><input type="text" placeholder='When'   onChange={props.handleTimeChange}/></div>
+            <div><input type="text" placeholder='Is this important?' onChange={props.handleImpChange}/></div>
+            <div><input type="text" placeholder='Is this urgent?'  onChange={props.handleUrgChange}/></div>
                 
-            <input id="Submit-button" type="submit" value="add"/>
+            <button   id="Submit-button"  onClick={props.handleSubmit}>add </button>
             </form>
         </div>
     )
