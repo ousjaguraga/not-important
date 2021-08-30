@@ -1,36 +1,60 @@
 import React from 'react';
 import './App.css';
-import Form from './components/entry'
+import Form from './components/entry-form'
 
+
+interface ITodo {
+  name: string
+  time: Date
+  important: string | number | readonly string[] | undefined
+  urgent: string | number | readonly string[] | undefined
+}
 
 function App() {
-
+  
+  const d = new Date('30 AUgust 2021')
   const [name, setName] = React.useState('')
-  const [time, setTime] = React.useState('')
-  const [important, setImp] = React.useState('')
-  const [urgent, setUrg] = React.useState('')
+  const [time, setTime] = React.useState(d)
+  const [important, setImp] = React.useState('off')
+  const [urgent, setUrg] = React.useState('off')
 
  
-
-  const [todos, setTodos] = React.useState([{name: 'not set'}])
+  let initialTodo = {
+    name: '',
+    important: 'off',
+    urgent: 'off',
+    time: d
+  }
+  const [todos, setTodos] = React.useState<ITodo[]>([initialTodo])
   
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>)  =>  {
-      setName(e.currentTarget.value)
+    const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>)  =>  {
+      
+      if (e.target.name === 'name'){
+        setName(e.currentTarget.value)
+      } else if (e.target.name === 'time'){
+        setTime(new Date(e.currentTarget.value))
+      } else if (e.target.name === 'urgent'){
+  
+        if (e.target.checked){
+          setUrg('on')
+        } else {
+          setUrg('off')
+        }
+        
+      } else if (e.target.name === 'important'){
+        if (e.target.checked){
+          setImp('on')
+        } else {
+          setImp('off')
+        }
+      }
+      
     }
-    const handleTimeChange =(e: React.ChangeEvent<HTMLInputElement>)  =>  {
-      setTime(e.currentTarget.value)
-    }
-  const handleUrgChange = (e: React.ChangeEvent<HTMLInputElement>)  =>  {
-    setImp(e.currentTarget.value)
-  }
-  const handleImpChange = (e: React.ChangeEvent<HTMLInputElement>)  =>  {
-    e.preventDefault()
-    setUrg(e.currentTarget.value)
-  }
+    
 
     const handleSubmit = ()  =>  {
-       setTodos([{name: name}])
-       console.log(todos)
+       setTodos([...todos, {name: name, time: time, urgent: urgent, important: important}])
+       
        
     }
   
@@ -40,32 +64,19 @@ function App() {
         <h1>important or not</h1>
         <p>enter activity details below</p>
 
-        <form id='Entry-form'>
-            <div><input type="text" placeholder='Name'   onChange={handleNameChange}/></div>
-            <div><input type="text" placeholder='When'  onChange={handleTimeChange}/></div>
-            <div><input type="text" placeholder='Is this important?' onChange={handleImpChange}/></div>
-            <div><input type="text" placeholder='Is this urgent?'  onChange={handleUrgChange}/></div>
-            
-            <button id="Submit-button"  onClick={handleSubmit}>add </button>
-        </form>
-        
+        <Form handleValueChange={handleValueChange} handleSubmit={handleSubmit} urgencyValue={urgent} importantValue={important}/>
       </header>
 
       
-      <ul>
-        <li>
-          {name}
-        </li>
-        <li>
-          {time}
-        </li>
-        <li>
-          {important}
-        </li>
-        <li>
-          {urgent}
-        </li>
-      </ul>
+     
+        
+        {todos.map(todo =>  <ul>
+          <li>{todo.name}</li>
+          <li>{todo.urgent}</li>
+          <li>{todo.important}</li>
+          </ul>
+        )}
+      
     </div>
   );
 }
